@@ -1,0 +1,54 @@
+@font-face {
+    font-family: jura-bold;
+    src: url(/resources/fonts/jura/Jurademibold.ttf);
+}
+
+@font-face {
+    font-family: jura-medium;
+    src: url(/resources/fonts/jura/Juramedium.ttf);
+}
+
+@font-face {
+    font-family: orbitron-bold;
+    src: url(/resources/fonts/orbitron/OrbitronBold.ttf);
+}
+
+body{
+    text-align: center;
+}
+
+#home{
+    height: 90vh;
+    width: 100vw;
+    background-color: aquamarine;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1{
+    font-size: 40px;
+    font-weight: 800;
+    font-family: orbitron-bold;
+}
+
+.btn{
+    width: 400px;
+    color: white;
+    background-color: none;
+}
+
+.btn:hover{
+    color: white;
+    border-radius: 90px;
+    background-color: rgb(18, 136, 97);
+}
+
+#footer{
+    height: 10vh;
+    width: 100vw;
+    background-color:aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
