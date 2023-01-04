@@ -184,6 +184,23 @@ body{
     transition:all 0.6s;
 }
 
+.register-btn{
+    color: white;
+    border: 0;
+    border-radius: 40px;
+    background-color: #202020;
+    margin-top: 30px;
+    height: 70px;
+    width: 30%;
+    transition:all 0.6s;
+}
+
+.register-btn:hover{
+    border: 2px solid #202020;
+    color: black;
+    background-color: #ffffff;
+}
+
 .login-btn:hover{
     border: 2px solid #202020;
     color: black;
@@ -276,6 +293,10 @@ body{
         font-size: 29px;
     }
 
+    .container-succefull{
+        width: 80%;
+    }
+
     .logo-container{
         width: 150px;
     }
@@ -324,6 +345,11 @@ body{
         width: 200px;
     }
 
+    .register-btn{
+        height: 50px;
+        width: 300px;
+    }
+
     .login-btn{
         height: 50px;
         width: 300px;
@@ -340,7 +366,7 @@ body{
 
 @media only screen and (max-width: 433px) {
     h2{
-        font-size: 32px;
+        font-size: 42px;
     }
     
     h3{
@@ -348,11 +374,19 @@ body{
     }
     
     h5{
+        font-size: 25px;
+    }
+
+    p{
         font-size: 23px;
     }
 
+    .title-delete{
+        font-size: 29px;
+    }
+
     .logo-container{
-        width: 100px;
+        width: 150px;
     }
 
     .col-custom{
@@ -360,32 +394,43 @@ body{
     }
 
     .input-text{
-        height: 40px;
+        height: 50px;
         width: 100%;
     }
 
     .input{
-        font-size: 20px;
-        height: 40px;
-        width: 150px;
+        font-size: 15px;
+        height: 50px;
+        width: 120%;
+    }
+
+    .register-btn{
+        margin-top: 20px;
+        padding: 5px;
+        height: 50px;
+        width: 170px;
     }
 
     .login-btn{
         margin-top: 20px;
         padding: 5px;
-        height: 40px;
-        width: 150px;
+        height: 50px;
+        width: 170px;
     }
 
     .go-login{
         width: 150px;
     }
-}
 
+    .login-bottom-container{
+        margin-top: -10px;
+    }
+}
 
 @media only screen and (max-width: 310px) {
     h2{
-        font-size: 28px;
+        margin-top: 20px;
+        font-size: 39px;
     }
     
     h3{
@@ -393,34 +438,63 @@ body{
     }
     
     h5{
-        font-size: 22px;
+        font-size: 29px;
     }
 
+    .logo-container{
+        width: 100px;
+    }
 
     .col-custom{
-        width: 50%;
+        margin-top: -60px;
+        position: absolute;
+        width: 100%;
     }
 
     .input-text{
+        display: flex;
+        justify-content: center;
+        align-self: center;
+        margin-top: 70px;
         height: 40px;
         width: 100%;
     }
 
-    .input{
-        font-size: 19px;
-        height: 40px;
-        width: 130px;
+    form{
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 40px;
+        position: absolute;
     }
 
-    .login-btn{
-        margin-top: 10px;
-        padding: 5px;
+    .input{
+        font-size: 15px;
+        margin-top: 70px;
         height: 40px;
+        width: 30vh;
+    }
+
+    .register-btn{
+        margin-top: 500px;
+        padding: 5px;
+        height: 45px;
         width: 150px;
     }
 
-    .go-login{
-        border-radius: 10px;
-        width: 100px;
+    .register-bottom-container{
+        padding: 0;
+        margin-top: -10px;
+    }
+    
+    .login-btn{
+        margin-top: 300px;
+        padding: 5px;
+        height: 45px;
+        width: 150px;
+    }
+
+    .login-bottom-container{
+        padding: 0;
+        margin-top: -80px;
     }
 }

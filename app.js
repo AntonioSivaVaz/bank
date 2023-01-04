@@ -2,12 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const mydate = require('current-date');
+var md5 = require('md5');
+const cookieParser = require('cookie-parser');
+
+require("dotenv").config();
 
 const con = mysql.createConnection({
-    host: "trinbank-db.c40s53yigyat.us-east-1.rds.amazonaws.com",
-    user: "trinAdminAntonio",
-    password: "m0pIk2oCute",
-    database: "customer_details"
+    host: process.env.hostLink,
+    user: process.env.databaseUser,
+    password: process.env.databasePassword,
+    database: process.env.databaseName
 })
 
 const app = express();
@@ -17,14 +21,14 @@ app.set('views', __dirname);
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'));
+app.use(cookieParser());
 
 let shouldThisUserLogin;
 let shouldThisUserRegister;
 let tooYoungOrOld;
-let authentication;
-
 let currentUserEmail;
 
+//DATABSE INTERECTIONS
 
 function getAge(userBirthYear, userBirthMonth, userBirthDay){
 
@@ -65,22 +69,28 @@ function insertDataIntoDatabase(fullName, birthDate, age, email, password, res){
                     shouldThisUserRegister = false;
                 } else{
                     shouldThisUserRegister = true;
-                    var sql = "INSERT INTO information (full_name, birth_date, age, email, password) VALUES ?";
+
+                    var id = Math.random().toString(36).slice(-8);
+
+                    var pointer = Math.random()*1000;
+                    pointer = (pointer+"").split(".")[1];
+
+                    var sql = "INSERT INTO information (full_name, birth_date, age, email, password, id, pointer) VALUES ?";
                     var values = [
-                        [fullName, birthDate, age, email, password]
+                        [fullName, birthDate, age, email, password, id, pointer]
                     ]
                     con.query(sql, [values], function(err, result){
                         if(err) throw err;
                     });
                     res.redirect("/succefull");
+                    process.env.succefullPage = 'true';
                 }
             })
         })
     }
-
 }
 
-function loginUser(userEmail, userPassword, res){
+function loginUser(userEmail, userPassword, res, authentication){
     con.connect(function(err){
         con.query(`SELECT * from information WHERE email = '${userEmail}'`, 
         function(err, rows){
@@ -88,10 +98,14 @@ function loginUser(userEmail, userPassword, res){
             try {
                 rows[0].email;
                 if(userPassword==rows[0].password){
-                    currentUserEmail = userEmail;
-
-                    res.redirect("/home"+authentication);
-                    shouldThisUserLogin = true;
+                    con.query(`SELECT id,pointer from information WHERE email = '${userEmail}'`,
+                    function(err, rows){
+                        process.env.authentication = "&="+ rows[0].id + "&" + "&" +rows[0].pointer;
+                        currentUserEmail = userEmail;
+                        shouldThisUserLogin = true;
+                        startHomePage(rows[0].id);
+                        res.redirect("/home"+process.env.authentication);
+                    });
                 } else{
                     shouldThisUserLogin = false;
                 }
@@ -110,43 +124,42 @@ function deleteUser(res){
 
     con.connect(function(err){
         con.query(`DELETE FROM information WHERE email='${currentUserEmail}'`,
+        process.env.deletedPage = 'true',
         function(err){
             if (err) throw err;
-            app.get("/deleted", function(req, res){
-                res.render("deleted.html", {
-                    email: currentUserEmail,
-                });
-            })
             res.redirect('/deleted');
         }
         )
     })
 }
 
-app.get("/test",function(req,res){
-    res.render('test.html');
-})
+//PAGES FUNCTION
 
-app.post("/test1", function(req, res){
-    var id = req.params.id
-    console.log(id);
-})
+function startHomePage(accID){
+    
+    app.get("/home"+ process.env.authentication, function(req, res){
+        if (req.cookies.accID=="test") {
+            res.render("home.html");
+        } else{
+            if(shouldThisUserLogin == true){
+                shouldThisUserLogin = false;
+                res.cookie("accID", "test")
+                res.render("home.html");
+            } else{
+                shouldThisUserLogin = false;
+                res.redirect("/login");
+            }
+        }
 
+    })
+}
+
+//POST ACTIONS
 
 app.post("/login", function(req, res){
     let userEmail = req.body.email;
     let userPassword = req.body.password;
-
-    let key = Math.random()*1000;
-    key = (key+"").split(".")[1];
-    
     loginUser(userEmail, userPassword, res);
-
-    authentication = userEmail+'=login&'+key;
-
-    app.get("/home"+ authentication, function(req, res){
-        res.render("home.html");
-    })
 })
 
 app.post("/register_new_user", function(req, res){
@@ -165,9 +178,10 @@ app.post("/register_new_user", function(req, res){
 })
 
 app.post("/delete", function(req ,res){
-    app.delete('/deleted');
     deleteUser(res);
 })
+
+//GET ACTIONS
 
 app.get("/", function(req, res){
     res.redirect("/login");
@@ -182,17 +196,39 @@ app.get("/register", function(req, res){
 })
 
 app.get("/succefull", function(req, res){
-    res.render("succefull.html");
+    if(process.env.succefullPage === 'true'){
+        res.render("succefull.html");
+        process.env.succefullPage = 'false';
+    } else {
+        res.redirect("/404");
+    }
+})
+
+app.get("/deleted", function(req, res){
+    if(process.env.deletedPage==='true'){
+        process.env.deletedPage = 'false',
+        res.render("deleted.html", {
+            email: currentUserEmail,
+        });
+    } else{
+        res.redirect("/404");
+    }
 })
 
 app.get("/shouldLogin", function(req,res){
-    res.send({somethingWrong: shouldThisUserLogin})
+    res.send({somethingWrong: shouldThisUserLogin});
 })
 
 app.get("/shouldregister", function(req,res){
-    res.send({notRegister: shouldThisUserRegister, tooYoungOrOld:tooYoungOrOld})
+    res.send({notRegister: shouldThisUserRegister, tooYoungOrOld:tooYoungOrOld});
 })
 
-app.listen(3000, function(req, res){
+app.get("/404", function(req,res){
+    res.render("404.html");
+})
+
+//PORT SET
+
+app.listen(process.env.PORT || 3000, function(req, res){
     console.log('Server on in port 3000');
 })
