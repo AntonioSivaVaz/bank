@@ -28,6 +28,10 @@ let shouldThisUserRegister;
 let tooYoungOrOld;
 let currentUserEmail;
 
+
+var homeRouter = express.Router();
+
+
 //DATABSE INTERECTIONS
 
 function getAge(userBirthYear, userBirthMonth, userBirthDay){
@@ -103,7 +107,8 @@ function loginUser(userEmail, userPassword, res, authentication){
                         process.env.authentication = "&="+ rows[0].id + "&" + "&" +rows[0].pointer;
                         currentUserEmail = userEmail;
                         shouldThisUserLogin = true;
-                        startHomePage(rows[0].id);
+                        let accID = rows[0].id;
+                        startHomePage();
                         res.redirect("/home"+process.env.authentication);
                     });
                 } else{
@@ -133,26 +138,24 @@ function deleteUser(res){
     })
 }
 
-//PAGES FUNCTION
-
-function startHomePage(accID){
-    
-    app.get("/home"+ process.env.authentication, function(req, res){
-        if (req.cookies.accID=="test") {
+function startHomePage (){
+    app.get("/home"+process.env.authentication, function(req,res){
+        if(process.env.authentication!="none"){
+            res.cookie("login", "true");
             res.render("home.html");
+            process.env.authentication = "none";
         } else{
-            if(shouldThisUserLogin == true){
-                shouldThisUserLogin = false;
-                res.cookie("accID", "test")
+            if(req.cookies.login==="true"){
                 res.render("home.html");
             } else{
-                shouldThisUserLogin = false;
-                res.redirect("/login");
+                res.redirect("/404");
             }
         }
-
     })
 }
+
+//PAGES FUNCTION
+
 
 //POST ACTIONS
 
@@ -185,6 +188,10 @@ app.post("/delete", function(req ,res){
 
 app.get("/", function(req, res){
     res.redirect("/login");
+    
+    app.get("*", (req,res)=>{
+        res.render("404.html");
+    })
 })
 
 app.get("/login", function(req, res){
