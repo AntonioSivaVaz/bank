@@ -142,11 +142,11 @@ function startHomePage (){
     app.get("/home"+process.env.authentication, function(req,res){
         if(process.env.authentication!="none"){
             res.cookie("login", "true");
-            res.render("home.html");
+            res.render("pages/home.html");
             process.env.authentication = "none";
         } else{
             if(req.cookies.login==="true"){
-                res.render("home.html");
+                res.render("pages/home.html");
             } else{
                 res.redirect("/404");
             }
@@ -186,25 +186,27 @@ app.post("/delete", function(req ,res){
 
 //GET ACTIONS
 
+
+// POSSIBLE HANDLE OF ERROR PAGES //
+// app.get("*", (req,res)=>{
+//     res.render("404.html");
+// })
+
 app.get("/", function(req, res){
     res.redirect("/login");
-    
-    app.get("*", (req,res)=>{
-        res.render("404.html");
-    })
 })
 
 app.get("/login", function(req, res){
-    res.render("login.html");
+    res.render("pages/login.html");
 })
 
 app.get("/register", function(req, res){
-    res.render("register.html");
+    res.render("pages/register.html");
 })
 
 app.get("/succefull", function(req, res){
     if(process.env.succefullPage === 'true'){
-        res.render("succefull.html");
+        res.render("pages/succefull.html");
         process.env.succefullPage = 'false';
     } else {
         res.redirect("/404");
@@ -214,7 +216,7 @@ app.get("/succefull", function(req, res){
 app.get("/deleted", function(req, res){
     if(process.env.deletedPage==='true'){
         process.env.deletedPage = 'false',
-        res.render("deleted.html", {
+        res.render("pages/deleted.html", {
             email: currentUserEmail,
         });
     } else{
@@ -231,7 +233,7 @@ app.get("/shouldregister", function(req,res){
 })
 
 app.get("/404", function(req,res){
-    res.render("404.html");
+    res.render("pages/404.html");
 })
 
 //PORT SET
