@@ -1,0 +1,109 @@
+@font-face {
+    font-family: jura-bold;
+    src: url(/resources/fonts/jura/Jurademibold.ttf);
+}
+
+@font-face {
+    font-family: jura-medium;
+    src: url(/resources/fonts/jura/Juramedium.ttf);
+}
+
+@font-face {
+    font-family: orbitron-bold;
+    src: url(/resources/fonts/orbitron/OrbitronBold.ttf);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+h2{
+    font-family: orbitron-bold;
+    font-size: 40px;
+}
+
+h3{
+    font-family: jura-bold;
+    font-size: 30px;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+p{
+    line-height: 30px;
+    font-family: jura-medium;
+    font-size: 30px;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    min-height: 100vh;
+    height: max-content;
+    background-image: linear-gradient(45deg, #a2d2ff, #cdb4db);
+    background-repeat: no-repeat;
+}
+
+.container-succefull{
+    margin-top: 5%;
+    width: 50%;
+}
+
+.go-login{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 70px;
+    border-radius: 50px;
+    background-color: #202020;
+    border: 2px solid #202020;
+    transition: all 0.5s;
+}
+
+.go-login a{
+    color: white;
+}
+
+.go-login:hover{
+    background-color: white;
+    border: 2px solid black;
+}
+
+.go-login a:hover{
+    color: black;
+}
+
+.red-text{
+    color: red;
+}
+
+.green-text{
+    color: green;
+}
+
+@media only screen and (max-width: 1024px){
+    .container-succefull{
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 425px){
+    h2{
+        font-size: 30px;
+    }
+    
+    h3{
+        font-size: 25px;
+    }
+    
+    p{
+        font-size: 30px;
+    }
+}

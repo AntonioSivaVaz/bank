@@ -14,11 +14,6 @@
 }
 
 
-*{
-    margin: 0;
-    padding: 0;
-}
-
 h2{
     font-family: orbitron-bold;
     font-size: 40px;
@@ -29,14 +24,8 @@ h3{
     font-size: 30px;
 }
 
-h5{
-    font-family: jura-medium;
-    font-size: 30px;
-}
-
-p{
-    line-height: 30px;
-    font-family: jura-medium;
+h4{
+    font-family: jura-bold;
     font-size: 30px;
 }
 
@@ -45,456 +34,196 @@ a{
     text-decoration: none;
 }
 
+p{
+    line-height: 30px;
+    font-family: jura-medium;
+    font-size: 30px;
+}
+
 a:hover{
     color: black;
 }
 
 body{
-    max-width: 100vw;
-    max-height: 100vh;
-    text-align: center;
-}
-
-.bg-login{
-    padding: 20px;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    position: absolute;
-    z-index: -1;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    background-color: #E1E1E1;
-    filter: blur(12px);
-    opacity: 0.8;
+    text-align: center;
+    background: linear-gradient(-45deg, #7A5858 20%, #367e77);
 }
 
-.rectangle{
-    margin: auto;
-    position: absolute;
-    width: 33.3vw;
-    height: 50vh;
+.trinLogo-container{
+    margin: 0;
+    padding: 0;
 }
 
-.top-right{
-    top: 0;
-    bottom: 1;
-    left: 1;
-    right: 0;
-    background-color: #7D7E36;
-}
-
-.top-left{
-    top: 0;
-    bottom: 1;
-    left: 0;
-    right: 1;
-    background-color: #423C3C;
-}
-
-.top-middle{
-    top: 0;
-    bottom: 1;
-    left: 0;
-    right: 0;
-    background-color: #627a58;
-}
-
-.bottom-left{
-    top: 1;
-    bottom: 0;
-    left: 0;
-    right: 1;
-    background-color: #7A5858;
-}
-
-.bottom-middle{
-    top: 1;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #367e77;
-}
-
-.bottom-right{
-    top: 1;
-    bottom: 0;
-    left: 1;
-    right: 0;
-    background-color: #ABE1E4;
-}
-
-
-.col-custom{
-    width: 46%;
-}
-
-.logo-container{
+.trinLogo{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 170px;
     height: 70px;
+    color: white;
     background-color: #202020;
 }
 
-.login-container{
-    margin-top: 100px;
-}
-
-.register{
-    margin-top: 30px;
-}
-
 .logo-text{
-    color: white;
+    font-size: 30px;
+    font-family: jura-bold;
+}
+
+.main-container{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
 }
 
 .input-text{
     display: flex;
-    justify-content: right;
+    justify-content: end;
     align-items: center;
-    margin-top: 30px;
-    height: 70px;
-}
-
-.input{
-    font-family: jura-medium;
-    font-size: 20px;
-    padding: 30px;
-    color: white;
-    display: flex;
-    border: 0;
-    border-radius: 40px;
-    background-color: #202020;
-    margin-top: 30px;
-    height: 70px;
-    width: 300px;
-}
-
-.login-btn{
-    color: white;
-    border: 0;
-    border-radius: 40px;
-    background-color: #202020;
-    margin-top: 30px;
-    height: 70px;
-    width: 30%;
-    transition:all 0.6s;
-}
-
-.register-btn{
-    color: white;
-    border: 0;
-    border-radius: 40px;
-    background-color: #202020;
-    margin-top: 30px;
-    height: 70px;
-    width: 30%;
-    transition:all 0.6s;
-}
-
-.register-btn:hover{
-    border: 2px solid #202020;
-    color: black;
-    background-color: #ffffff;
-}
-
-.login-btn:hover{
-    border: 2px solid #202020;
-    color: black;
-    background-color: #ffffff;
-}
-
-.login-bottom-container{
-    margin-top: 1%;
-}
-
-#if-wrong-display{
-    margin-top: 20px;
-    visibility:hidden;
-    font-size: 35px;
-    font-weight: 800;
-    color: red;
-}
-
-#register-wrong{
-    margin-top: 20px;
-    visibility:hidden;
-    font-size: 35px;
-    font-weight: 800;
-    color: red;
-}
-
-.bg-succefull{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    width: 100vw;
-    height: 100vh;
-    filter: blur(100px);
-    background-color: rgb(159, 156, 156);
-}
-
-.container-succefull{
-    margin: 4% auto;
-    text-align: left;
     width: 50%;
 }
 
-.go-login{
-    margin-top: 20px;
-    text-align: center;
+.input-input{
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-    border: 0;
-    border-radius: 40px;
-    background-color: #202020;
-    height: 70px;
-    width: 300px;
+    width: 50%;
 }
 
-.go-login:hover{
-    background-color: #367e77;
-}
-
-.text{
-    margin-top: 20px;
-}
-
-.white-text{
+.input{
+    padding: 15px;
+    font-size: 20px;
     color: white;
+    background-color: #202020;
+    width: 310px;
+    height: 70px;
+    border-radius: 200px;
+    border: 0;
 }
 
-.green-text{
-    color: green;
+.btn{
+    font-size: 20px;
+    color: white;
+    background-color: #202020;
+    height: 60px;
+    width: 300px;
+    border-radius: 100px;
+    transition: all 0.5s;
+    border: solid #202020 2px;
 }
 
-.red-text{
+.btn:hover{
+    background-color: white;
+    border: solid black 2px;
+}
+
+#if-wrong-display{
     color: red;
+    visibility: hidden;
 }
 
-@media only screen and (max-width: 800px) {
+#register-wrong{
+    font-family: jura-bold;
+    font-size: 30px;
+    color: red;
+    visibility: hidden;
+}
+
+@media only screen and (max-width: 768px) {
+    .trinLogo{
+        width: 150px;
+        height: 60px;
+    }
+
+    .logo-text{
+        font-size: 24px;
+    }
 
     h2{
-        font-size: 37px;
+        font-size: 35px;
     }
-    
+
     h3{
         font-size: 28px;
     }
+
+    h4{
+        font-size: 28px;
+    }
     
-    h5{
-        font-size: 29px;
+    #register-wrong{
+        font-size: 28px;
     }
 
-    .container-succefull{
-        width: 80%;
+    .input{
+        font-size: 20px;
+        width: 240px;
+        height: 60px;
     }
 
-    .logo-container{
-        width: 150px;
+    .btn{
+        width: 200px;
+        height: 60px;
     }
-
-    .col-custom{
-        width: 40%;
-    }
-
-    .login-bottom-container{
-        margin-top: 20px;
-    }
-
-
 }
 
-@media only screen and (max-width: 540px) {
+@media only screen and (max-width: 600px) {
+
+    .input-text{
+        justify-content: center;
+        width: 100%;
+    }
+
+    .input-input{
+        justify-content: center;
+        width: 100%;
+    }
+
+    .input{
+        width: 300px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .main-container{
+        position: relative;
+        left: 0;
+        top: 0;
+        transform: translate(0%, 0%);
+    }
+
+    .trinLogo{
+        width: 140px;
+        height: 50px;
+    }
+
+    .logo-text{
+        font-size: 18px;
+    }
+
     h2{
-        font-size: 34px;
+        font-size: 35px;
     }
-    
+
     h3{
-        font-size: 25px;
-    }
-    
-    h5{
         font-size: 26px;
     }
 
-    .logo-container{
-        width: 130px;
+    h4{
+        font-size: 27px;
     }
 
-    .col-custom{
-        width: 50%;
-    }
-
-    .input-text{
-        height: 50px;
-        width: 100%;
+    #register-wrong{
+        font-size: 27px;
     }
 
     .input{
-        font-size: 24px;
-        padding: 10px;
-        height: 50px;
-        width: 200px;
-    }
-
-    .register-btn{
-        height: 50px;
         width: 300px;
     }
 
-    .login-btn{
-        height: 50px;
-        width: 300px;
-    }
-
-    .container-succefull{
-        width: 80%;
-    }
-
-    .go-login{
-        width: 200px;
-    }
-}
-
-@media only screen and (max-width: 433px) {
-    h2{
-        font-size: 42px;
-    }
-    
-    h3{
-        font-size: 23px;
-    }
-    
-    h5{
-        font-size: 25px;
-    }
-
-    p{
-        font-size: 23px;
-    }
-
-    .title-delete{
-        font-size: 29px;
-    }
-
-    .logo-container{
-        width: 150px;
-    }
-
-    .col-custom{
-        width: 47%;
-    }
-
-    .input-text{
-        height: 50px;
-        width: 100%;
-    }
-
-    .input{
-        font-size: 15px;
-        height: 50px;
-        width: 120%;
-    }
-
-    .register-btn{
-        margin-top: 20px;
-        padding: 5px;
-        height: 50px;
-        width: 170px;
-    }
-
-    .login-btn{
-        margin-top: 20px;
-        padding: 5px;
-        height: 50px;
-        width: 170px;
-    }
-
-    .go-login{
-        width: 150px;
-    }
-
-    .login-bottom-container{
-        margin-top: -10px;
-    }
-}
-
-@media only screen and (max-width: 310px) {
-    h2{
-        margin-top: 20px;
-        font-size: 39px;
-    }
-    
-    h3{
-        font-size: 19px;
-    }
-    
-    h5{
-        font-size: 29px;
-    }
-
-    .logo-container{
-        width: 100px;
-    }
-
-    .col-custom{
-        margin-top: -60px;
-        position: absolute;
-        width: 100%;
-    }
-
-    .input-text{
-        display: flex;
-        justify-content: center;
-        align-self: center;
-        margin-top: 70px;
-        height: 40px;
-        width: 100%;
-    }
-
-    form{
-        left: 50%;
-        transform: translateX(-50%);
-        margin-top: 40px;
-        position: absolute;
-    }
-
-    .input{
-        font-size: 15px;
-        margin-top: 70px;
-        height: 40px;
-        width: 30vh;
-    }
-
-    .register-btn{
-        margin-top: 500px;
-        padding: 5px;
-        height: 45px;
-        width: 150px;
-    }
-
-    .register-bottom-container{
-        padding: 0;
-        margin-top: -10px;
-    }
-    
-    .login-btn{
-        margin-top: 300px;
-        padding: 5px;
-        height: 45px;
-        width: 150px;
-    }
-
-    .login-bottom-container{
-        padding: 0;
-        margin-top: -80px;
+    .btn{
+        font-size: 20px;
     }
 }
