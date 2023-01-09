@@ -3,9 +3,23 @@ const wrongRegister = document.getElementById('register-wrong');
 
 let myIntervalLogin;
 let myIntervalRegister;
+let url;
+
+function getCurrentUrl(){
+    var str = window.location.href;
+    let indexes;
+    for (let index = 0; index < str.length; index++) {
+      if (str[index] === '/') {
+        indexes = index;
+      }
+    }
+    currentUrl = str.slice(0, indexes+1);
+    return currentUrl;
+}
 
 function keepCheckingLogin(){
-    fetch('http://localhost:3000/shouldLogin')
+    url = getCurrentUrl();
+    fetch(url + 'shouldLogin')
     .then((response) => response.json())
     .then((data) => {
         if(data.somethingWrong!="undefined"){
@@ -22,7 +36,8 @@ function keepCheckingLogin(){
 }
 
 function checkIfLogin(){
-    fetch('http://localhost:3000/shouldLogin')
+    url = getCurrentUrl();
+    fetch(url + 'shouldLogin')
     .then((response) => response.json())
     .then((data) => {
         myIntervalLogin = setInterval(keepCheckingLogin, 500);
@@ -31,7 +46,8 @@ function checkIfLogin(){
 }
 
 function keepCheckingRegister(){
-    fetch('http://localhost:3000/shouldregister')
+    url = getCurrentUrl();
+    fetch(url + 'shouldLogin')
     .then((response) => response.json())
     .then((data) => {
         if(data.tooYoungOrOld=="true"){
@@ -53,10 +69,10 @@ function keepCheckingRegister(){
 }
 
 function checkRegister(){
-    fetch('http://localhost:3000/shouldregister')
+    url = getCurrentUrl();
+    fetch(url+'shouldregister')
     .then((response) => response.json())
     .then((data) => {
         myIntervalRegister = setInterval(keepCheckingRegister, 500);
     })
-
 }
