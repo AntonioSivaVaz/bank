@@ -229,7 +229,7 @@ app.listen(process.env.PORT || 3000, function(req, res){
 // HANDLE OF ERROR PAGES //
 function handleErrorPage(){
     app.get("*", function(req, res, next){
-        if(req.url.slice(1,5)=="home"+process.env.authentication){
+        if(req.url.slice(1,40)=="home"+process.env.authentication){
             next();
         } else{
             res.render("pages/404.html");
