@@ -47,7 +47,7 @@ function checkIfLogin(){
 
 function keepCheckingRegister(){
     url = getCurrentUrl();
-    fetch(url + 'shouldLogin')
+    fetch(url + 'shouldregister')
     .then((response) => response.json())
     .then((data) => {
         if(data.tooYoungOrOld=="true"){
