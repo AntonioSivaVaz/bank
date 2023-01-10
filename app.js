@@ -22,6 +22,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'));
 app.use(cookieParser());
 
+cookieArray = [];
+
 //DATABSE INTERECTIONS
 
 function getAge(userBirthYear, userBirthMonth, userBirthDay){
@@ -94,12 +96,24 @@ function loginUser(userEmail, userPassword, res, authentication){
                 if(userPassword==rows[0].password){
                     con.query(`SELECT id,pointer from information WHERE email = '${userEmail}'`,
                     function(err, rows){
+                        let sameCookie = false;
+
                         process.env.authentication = "&="+ rows[0].id + "&" + "&" +rows[0].pointer;
                         process.env.currentEmail = userEmail;
                         process.env.shouldLogin = true;
-                        let accID = rows[0].id;
+
+                        for (let index = 0; index < cookieArray.length; index++) {
+                            if(cookieArray[index] == process.env.authentication){
+                                sameCookie = true;
+                            }
+                        }
+                        if(sameCookie==false){
+                            cookieArray.push(process.env.authentication);
+                            res.cookie("accounts", cookieArray)
+                        }
                         startHomePage();
                         res.redirect("/home"+process.env.authentication);
+                        sameCookie = false;
                     });
                 } else{
                     process.env.shouldLogin = false;
@@ -132,22 +146,27 @@ function deleteUser(res){
 
 function startHomePage (){
     app.get("/home"+process.env.authentication, function(req,res){
+        
         if(process.env.authentication!="none"){
-            res.cookie("login", "true");
             res.render("pages/home.html");
             process.env.authentication = "none";
         } else{
-            if(req.cookies.login==="true"){
-                res.render("pages/home.html");
-            } else{
-                res.redirect("/404");
+            let shouldLogin = false;
+
+            for (let index = 0; index < cookieArray.length; index++) {
+                if(req.url=="/home"+req.cookies.accounts[index]){
+                    res.render("pages/home.html");
+                    shouldLogin = true;
+                }
+                if(index==cookieArray.length && shouldLogin==false){
+                    res.redirect("/404");
+                }
             }
         }
     })
 }
 
 //POST ACTIONS
-
 
 app.post("/login", function(req, res){
     let userEmail = req.body.email;
@@ -181,6 +200,9 @@ app.get("/", function(req, res){
 })
 
 app.get("/login", function(req, res){
+    // res.clearCookie('accounts')
+    // console.log(req.cookies);
+
     res.render("pages/login.html");
 })
 
@@ -223,13 +245,14 @@ app.get("/404", function(req,res){
 //PORT SET
 
 app.listen(process.env.PORT || 3000, function(req, res){
-    console.log('Server on in port 3000');
+    console.log('Server on at port ' + process.env.PORT);
 })
 
 // HANDLE OF ERROR PAGES //
 function handleErrorPage(){
     app.get("*", function(req, res, next){
-        if(req.url.slice(1,40)=="home"+process.env.authentication){
+
+        if(req.url.slice(1,5)=="home"){
             next();
         } else{
             res.render("pages/404.html");
