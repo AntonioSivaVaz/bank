@@ -44,11 +44,6 @@ To deploy
 ```
 
 
-## Authors
-
-- [@AntonioSivaVaz](https://github.com/AntonioSivaVaz)
-
-
 ## Environment variables
 
 To run this project, you will need to add the following environment variables to your .env
@@ -80,13 +75,6 @@ To run this project, you will need to add the following environment variables to
 Node.js, express, Javascript, MySQL, HTML5, CSS3, Bootstrap
 
 
-## Feedback
-
-Feel free to email me at antoniosilvavaz04@gmail.com with any feedback you may have.
-## Learnings
-
-Building a website that can handle cookies, MySQL database connections for creating, deleting, and logging in, as well as using AWS RDS databases are some skills I learned and developed in the process
-
 ## Roadmap
 
 - Create the rest of the pages
@@ -95,6 +83,16 @@ Building a website that can handle cookies, MySQL database connections for creat
 
 - Create better error handlers
 
+## Feedback
+
+Feel free to email me at antoniosilvavaz04@gmail.com with any feedback you may have.
+## Learnings
+
+Building a website that can handle cookies, MySQL database connections for creating, deleting, and logging in, as well as using AWS RDS databases are some skills I learned and developed in the process
+
+## Authors
+
+- [@AntonioSivaVaz](https://github.com/AntonioSivaVaz)
 
 ## 🚀 About me
  Hello, I'm António Vaz from Lisbon in Portugal. I'm eighteen years old and I can create a few designs if needed, but my true passion is programming. I'm currently working on front-end development, but I'm hoping to be a full stack developer in the near future. If you're interested in learning more about me, click on the icons. Thanks for taking the time to explore
