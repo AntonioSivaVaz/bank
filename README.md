@@ -95,7 +95,7 @@ Building a website that can handle cookies, MySQL database connections for creat
 - [@AntonioSivaVaz](https://github.com/AntonioSivaVaz)
 
 ## 🚀 About me
- Hello, I'm António Vaz from Lisbon in Portugal. I'm eighteen years old and I can create a few designs if needed, but my true passion is programming. I'm currently working on front-end development, but I'm hoping to be a full stack developer in the near future. If you're interested in learning more about me, click on the icons. Thanks for taking the time to explore
+Antonio Vaz is my name and I am eighteen years old. I love programming and learning. I hope we will be able to meet in the future.
 
 ## 🔗 Links
 [![portfolio](https://img.shields.io/badge/Antonio_Portfolio-000?style=for-the-badge&logo=e&logoColor=red)](https://portfolio.antoniovaz.com/)
